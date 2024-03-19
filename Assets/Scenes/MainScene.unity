@@ -585,7 +585,7 @@ MonoBehaviour:
   dirt: {fileID: 517169747}
   rooms: 0
   size: 10
-  defaultSize: 6
+  defaultSize: 10
 --- !u!4 &1118319035
 Transform:
   m_ObjectHideFlags: 0

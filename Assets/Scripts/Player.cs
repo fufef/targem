@@ -11,9 +11,9 @@ public class Player : Character
         base.Start();
     }
 
-    private new void FixedUpdate()
+    private new void Update()
     {
-        base.FixedUpdate();
+        base.Update();
 
         // движение игрока. 
         // потом можно и переписать, в зависимости от того как будет нужно чтобы чел двигался 
