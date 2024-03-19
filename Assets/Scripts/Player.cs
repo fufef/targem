@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Player : Character
 {
-    private float speed = 10f;
+    [SerializeField]
+    private float speed;
 
     private new void Start()
     {

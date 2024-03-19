@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,10 @@ public class MapGen : MonoBehaviour
 
     [SerializeField]
     private int size;
+
+    [SerializeField]
+    private int defaultSize;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,45 +37,75 @@ public class MapGen : MonoBehaviour
 
     void Generation()
     {
-        DrawRectangle(-size, size, -size, size);
-        for (int x = size + 1; x < size + 10; x++)
+        for (int x = -3; x <= 3;  x++)
         {
-            var pixels = Random.Range(0, 5);
-            for (int i = 0; i < pixels; i++)
+            for (int y = -3; y <= 3; y++)
             {
-                MakeWall(dirt, x, Random.Range(-size, size));
-            }
-        }
-
-        for (int x = -(size + 1); x > -(size + 10); x--)
-        {
-            var pixels = Random.Range(0, 5);
-            for (int i = 0; i < pixels; i++)
-            {
-                MakeWall(dirt, x, Random.Range(-size, size));
+                MakeDefaultRectangle(x * defaultSize, y * defaultSize, true);
             }
         }
     }
 
-    void DrawRectangle(int x1, int x2, int y1, int y2)
+    void MakeDefaultRectangle(int x, int y, bool withHoles = false)
+    {
+        var x1 = x - defaultSize / 2;
+        var x2 = x + defaultSize / 2;
+        var y1 = y - defaultSize / 2;
+        var y2 = y + defaultSize / 2;
+        DrawRectangle(x1, x2, y1, y2, withHoles);
+    }
+
+    void DrawRectangle(int x1, int x2, int y1, int y2, bool withHoles = false)
     {
         for (int x = x1; x <= x2; x++)
         {
+            if (withHoles)
+            {
+                if (x == ((x1 + x2) / 2))
+                {
+                    continue;
+                }
+            }
+
             MakeWall(dirt, x, y1);
         }
 
         for (int x = x1; x <= x2; x++)
         {
+            if (withHoles)
+            {
+                if (x == ((x1 + x2) / 2))
+                {
+                    continue;
+                }
+            }
+
             MakeWall(dirt, x, y2);
         }
 
         for (int y = y1; y <= y2; y++)
         {
+            if (withHoles)
+            {
+                if (y == ((y1 + y2) / 2))
+                {
+                    continue;
+                }
+            }
+
             MakeWall(dirt, x1, y);
         }
 
         for (int y = y1; y <= y2; y++)
         {
+            if (withHoles)
+            {
+                if (y == ((y1 + y2) / 2))
+                {
+                    continue;
+                }
+            }
+
             MakeWall(dirt, x2, y);
         }
     }
@@ -85,5 +120,6 @@ public class MapGen : MonoBehaviour
         rigid.gravityScale = 0;
         rigid.constraints = RigidbodyConstraints2D.FreezeAll;
         rigid.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+        obj.name = $"{width} {height}";
     }
 }
