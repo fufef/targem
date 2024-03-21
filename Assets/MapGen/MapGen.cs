@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +10,7 @@ public class MapGen : MonoBehaviour
     private int height;
 
     [SerializeField]
-    private GameObject dirt;
+    private Wall wall;
 
     [SerializeField]
     private int rooms;
@@ -22,6 +20,14 @@ public class MapGen : MonoBehaviour
 
     [SerializeField]
     private int defaultSize;
+
+    [SerializeField]
+    private Sprite wallSprite;
+
+    [SerializeField]
+    private GameObject door;
+
+    private List<Wall> walls = new List<Wall>();
 
     // Start is called before the first frame update
     void Start()
@@ -37,12 +43,26 @@ public class MapGen : MonoBehaviour
 
     void Generation()
     {
-        for (int x = -3; x <= 3;  x++)
+        DrawRectangle(-5, 5, -4, 4);
+        DrawHorizontal(-5, 5, 5);
+        MakeDoor(door, -3, 4);
+        MakeDoor(door, 0, 4);
+        MakeDoor(door, 3, 4);
+    }
+
+    void DrawHorizontal(int x1, int x2, int y)
+    {
+        for (int x = x1; x <= x2; x++) 
         {
-            for (int y = -3; y <= 3; y++)
-            {
-                MakeDefaultRectangle(x * defaultSize, y * defaultSize, true);
-            }
+            MakeWall(wall, x, y);
+        }
+    }
+
+    void DrawVertical(int x, int y1, int y2)
+    {
+        for (int y = y1; x <= y2; x++)
+        {
+            MakeWall(wall, x, y);
         }
     }
 
@@ -67,7 +87,7 @@ public class MapGen : MonoBehaviour
                 }
             }
 
-            MakeWall(dirt, x, y1);
+            MakeWall(wall, x, y1);
         }
 
         for (int x = x1; x <= x2; x++)
@@ -80,7 +100,7 @@ public class MapGen : MonoBehaviour
                 }
             }
 
-            MakeWall(dirt, x, y2);
+            MakeWall(wall, x, y2);
         }
 
         for (int y = y1; y <= y2; y++)
@@ -93,7 +113,7 @@ public class MapGen : MonoBehaviour
                 }
             }
 
-            MakeWall(dirt, x1, y);
+            MakeWall(wall, x1, y);
         }
 
         for (int y = y1; y <= y2; y++)
@@ -106,20 +126,41 @@ public class MapGen : MonoBehaviour
                 }
             }
 
-            MakeWall(dirt, x2, y);
+            MakeWall(wall, x2, y);
         }
     }
 
-    void MakeWall(GameObject obj, int width, int height)
+    void MakeDoor(GameObject obj, int x, int y)
+    {
+        obj = Instantiate(obj, new Vector2(x, y), Quaternion.identity);
+        obj.transform.parent = this.transform;
+        var collider = obj.gameObject.AddComponent<BoxCollider2D>();
+        collider.size = new Vector2(1.5f, 1.5f);
+        collider.enabled = true;
+        collider.isTrigger = true;
+        obj.name = $"DOOR {x} {y}";
+    }
+
+    void MakeWall(Wall obj, int width, int height)
     {
         obj = Instantiate(obj, new Vector2(width, height), Quaternion.identity);
         obj.transform.parent = this.transform;
-        var rigid = obj.AddComponent<Rigidbody2D>();
-        var collider = obj.AddComponent<BoxCollider2D>();
+        var rigid = obj.gameObject.AddComponent<Rigidbody2D>();
+        var collider = obj.gameObject.AddComponent<BoxCollider2D>();
         collider.enabled = true;
         rigid.gravityScale = 0;
         rigid.constraints = RigidbodyConstraints2D.FreezeAll;
         rigid.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         obj.name = $"{width} {height}";
+        obj.ChangeSprite(wallSprite);
+        walls.Add(obj);
+    }
+
+    public void ChangeWalls(Sprite sprite)
+    {
+        foreach (var wall in walls)
+        {
+            wall.ChangeSprite(sprite);
+        }
     }
 }

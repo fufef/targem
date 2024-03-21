@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: a0599561568b5104e9266fa4765fd6ab
+guid: cfd4a71b8938a854f9d33220844b4593
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - dirt: {instanceID: 0}
-  - dirtSprite: {fileID: 21300000, guid: 334769b345f55ec4fa0e9b4b5e539fd7, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

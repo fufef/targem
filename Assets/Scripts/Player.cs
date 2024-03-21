@@ -9,6 +9,8 @@ public class Player : Character
     private new void Start()
     {
         base.Start();
+        var c = GetComponent<BoxCollider2D>();
+        c.tag = "Player";
     }
 
     private new void Update()
