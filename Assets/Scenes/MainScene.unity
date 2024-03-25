@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerActive: 0
-  behindDoorColor: {fileID: 21300000, guid: 4d8c75a4d7dd2a0489270e1058d82128, type: 3}
+  behindDoorColor: {fileID: 21300000, guid: 248611cc7bb8d85448933cee393ce41e, type: 3}
   mapGen: {fileID: 1118319034}
 --- !u!1 &270846118
 GameObject:
