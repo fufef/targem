@@ -13,6 +13,9 @@ public class MapGen : MonoBehaviour
     private Wall wall;
 
     [SerializeField]
+    private SlimWall slimWall;
+
+    [SerializeField]
     private int rooms;
 
     [SerializeField]
@@ -24,15 +27,35 @@ public class MapGen : MonoBehaviour
     [SerializeField]
     private Sprite wallSprite;
 
+    [SerializeField] 
+    private Sprite slimWallSprite;
+
     [SerializeField]
     private GameObject door;
 
     private List<Wall> walls = new List<Wall>();
 
+    private MazeGen mazeGen = new MazeGen();
+
     // Start is called before the first frame update
     void Start()
     {
         Generation();
+    }
+
+    public void GenerateMaze()
+    {
+        var maze = mazeGen.GetMaze(21, 1, 1);
+        for (int x = 0; x < 21; x++)
+        {
+            for (int y = 0; y < 21; y++)
+            {
+                if (!maze[x, y])
+                {
+                    MakeWall(wall, x + 40, y + 40);
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -135,6 +158,7 @@ public class MapGen : MonoBehaviour
         obj = Instantiate(obj, new Vector2(x, y), Quaternion.identity);
         obj.transform.parent = this.transform;
         var collider = obj.gameObject.AddComponent<BoxCollider2D>();
+        collider.tag = $"YellowDoor";
         collider.size = new Vector2(1.5f, 1.5f);
         collider.enabled = true;
         collider.isTrigger = true;
@@ -154,6 +178,65 @@ public class MapGen : MonoBehaviour
         obj.name = $"{width} {height}";
         obj.ChangeSprite(wallSprite);
         walls.Add(obj);
+    }
+
+    public enum DirectionW
+    {
+        WallFront,
+        WallLeft,
+        WallRight,
+        WallBack
+    }
+
+    void MakeSlimWall(SlimWall wall, int x, int y, DirectionW direction)
+    {
+        if (direction == DirectionW.WallFront)
+        {
+            MakeSlimWallInternal(wall, x, y + 0.5f, false);
+        }
+
+        if (direction == DirectionW.WallLeft)
+        {
+            MakeSlimWallInternal(wall, x - 0.5f, y, true);
+        }
+        
+        if (direction == DirectionW.WallRight)
+        {
+            MakeSlimWallInternal(wall, x + 0.5f, y, true);
+        }
+
+        if (direction == DirectionW.WallBack)
+        {
+            MakeSlimWallInternal(wall, x, y - 0.5f, false);
+        }
+    }
+
+    void MakeSlimWallInternal(SlimWall obj, float width, float height, bool isVertical)
+    {
+        obj = Instantiate(obj, new Vector2(width, height), Quaternion.identity);
+        obj.transform.localScale = new Vector2(isVertical ? 0.1f : 1.5f, isVertical ? 1.5f : 0.1f);
+        obj.transform.parent = this.transform;
+        var rigid = obj.gameObject.AddComponent<Rigidbody2D>();
+        var collider = obj.gameObject.AddComponent<BoxCollider2D>();
+        collider.enabled = true;
+        rigid.gravityScale = 0;
+        rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        rigid.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+        obj.name = $"{width} {height}";
+    }
+
+    void MakeSlimWallInternal(SlimWall obj, float x, float y, float w, float h)
+    {
+        obj = Instantiate(obj, new Vector2(x, y), Quaternion.identity);
+        obj.transform.localScale = new Vector2(w, h);
+        obj.transform.parent = this.transform;
+        var rigid = obj.gameObject.AddComponent<Rigidbody2D>();
+        var collider = obj.gameObject.AddComponent<BoxCollider2D>();
+        collider.enabled = true;
+        rigid.gravityScale = 0;
+        rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        rigid.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+        obj.name = $"{x} {y}";
     }
 
     public void ChangeWalls(Sprite sprite)
