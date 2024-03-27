@@ -18,8 +18,8 @@ public class Player : Character
         var c = GetComponent<BoxCollider2D>();
         c.tag = "Player";
     }
-
-    private new void Update()
+    public static int count_button = 0;
+    public new void Update()
     {
         base.Update();
 
@@ -28,9 +28,10 @@ public class Player : Character
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
             Move(new Vector3(Math.Sign(Input.GetAxis("Horizontal")), 
                              Math.Sign(Input.GetAxis("Vertical"))), speed);
-
-        if (triggerActive && Input.GetKeyDown(KeyCode.F))
+        
+        if (triggerActive && Input.GetKeyDown(KeyCode.E))
         {
+            count_button++;
             SomeCoolAction();
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CameraScript : MonoBehaviour
 {
     [SerializeField]
@@ -18,7 +19,9 @@ public class CameraScript : MonoBehaviour
         Vector3 targetPos = target.position + offset;   
         targetPos.z = transform.position.z;
 
-
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref vel, dampling);
+        if (Player.count_button % 2 != 0)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref vel, dampling);
+        }
     }
 }

@@ -10,7 +10,7 @@ public class MazeGen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void Shuffle(List<(int, int)> list)
@@ -29,7 +29,7 @@ public class MazeGen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public bool[,] GetMaze(int size, int x, int y)

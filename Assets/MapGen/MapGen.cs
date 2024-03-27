@@ -66,11 +66,11 @@ public class MapGen : MonoBehaviour
 
     void Generation()
     {
-        DrawRectangle(-5, 5, -4, 4);
-        DrawHorizontal(-5, 5, 5);
-        MakeDoor(door, -3, 4);
-        MakeDoor(door, 0, 4);
-        MakeDoor(door, 3, 4);
+        DrawRectangle(-12, 12, -5, 0);
+      //  DrawHorizontal(-5, 5, 5);
+        MakeDoor(door, -8, 0.5f);
+        MakeDoor(door, 0, 0.5f);
+        MakeDoor(door, 8, 0.5f);
     }
 
     void DrawHorizontal(int x1, int x2, int y)
@@ -153,13 +153,13 @@ public class MapGen : MonoBehaviour
         }
     }
 
-    void MakeDoor(GameObject obj, int x, int y)
+    void MakeDoor(GameObject obj, float x, float y)
     {
         obj = Instantiate(obj, new Vector2(x, y), Quaternion.identity);
         obj.transform.parent = this.transform;
         var collider = obj.gameObject.AddComponent<BoxCollider2D>();
         collider.tag = $"YellowDoor";
-        collider.size = new Vector2(1.5f, 1.5f);
+        collider.size = new Vector2(2.5f, 3f);
         collider.enabled = true;
         collider.isTrigger = true;
         obj.name = $"DOOR {x} {y}";
