@@ -66,11 +66,11 @@ public class MapGen : MonoBehaviour
 
     void Generation()
     {
-        DrawRectangle(-12, 12, -5, 0);
+        DrawRectangle(-14, 14, -6, 0);
       //  DrawHorizontal(-5, 5, 5);
-        MakeDoor(door, -8, 0.5f);
-        MakeDoor(door, 0, 0.5f);
-        MakeDoor(door, 8, 0.5f);
+        MakeDoor(door, -10, 0.2f);
+        MakeDoor(door, 0, 0.2f);
+        MakeDoor(door, 10, 0.2f);
     }
 
     void DrawHorizontal(int x1, int x2, int y)
