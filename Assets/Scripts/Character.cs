@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         if (!isDied && lives == 0) Die();
         rigidbody.velocity = new Vector2();
