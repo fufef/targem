@@ -5,6 +5,8 @@ public class Player : Character
     Animator animator;
     SpriteRenderer sprite;
     Rigidbody2D rb;
+    public HealthBar healthBar;
+    float health = 1;
 
 
     [SerializeField]
@@ -21,6 +23,7 @@ public class Player : Character
         var c = GetComponent<BoxCollider2D>();
         c.tag = "Player";
     }
+
     public static int count_button = 0;
 
 
@@ -63,6 +66,17 @@ public class Player : Character
             animator.Play("walk_down");
         }
 
+        if (Input.GetKey(KeyCode.X))
+        {
+            TakeDamage();
+        }
+
         rb.velocity = new Vector2(moveX, moveY);
+    }
+
+    public void TakeDamage()
+    {
+        health = health - 0.1f;
+        healthBar.SetHealth(health);
     }
 }
