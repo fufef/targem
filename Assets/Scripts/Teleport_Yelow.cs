@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeleportOnButtonPress : MonoBehaviour
+public class Teleport_Yelow : MonoBehaviour
 {
     public Transform teleportTarget;
 
@@ -10,7 +10,7 @@ public class TeleportOnButtonPress : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && IsInTrigger())
         {
-    
+            Debug.Log("1");
             transform.position = teleportTarget.position;
         }
     }
@@ -23,7 +23,7 @@ public class TeleportOnButtonPress : MonoBehaviour
         {
             if (collider.gameObject.tag == "TeleportTrigger")
             {
-
+                Debug.Log("2");
                 return true;
             }
         }

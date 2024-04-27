@@ -7,7 +7,9 @@ public class Player : Character
     Rigidbody2D rb;
     public HealthBar healthBar;
     float health = 1;
-
+    public Animator Animator;
+    public bool stopAnimation;
+    int speed_detector;
 
     [SerializeField]
     private float speed;
@@ -72,6 +74,13 @@ public class Player : Character
         }
 
         rb.velocity = new Vector2(moveX, moveY);
+        
+        if (moveX == 0 & moveY == 0)
+        {
+            Animator.SetInteger("walk", 0 );
+        }
+        else { Animator.SetInteger("walk", 1); }
+
     }
 
     public void TakeDamage()
