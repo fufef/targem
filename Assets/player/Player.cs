@@ -8,8 +8,7 @@ public class Player : Character
     public HealthBar healthBar;
     float health = 1;
     public Animator Animator;
-    public bool stopAnimation;
-    int speed_detector;
+
 
     [SerializeField]
     private float speed;

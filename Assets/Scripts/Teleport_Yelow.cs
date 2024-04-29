@@ -5,29 +5,22 @@ using UnityEngine;
 public class Teleport_Yelow : MonoBehaviour
 {
     public Transform teleportTarget;
-
+    public Collider2D targetCollider; // Назначить коллайдер, который нужно проверить в инспекторе
+    private bool IN;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && IsInTrigger())
+
+        if (Input.GetKeyDown(KeyCode.E) && IN)
         {
-            Debug.Log("1");
             transform.position = teleportTarget.position;
         }
     }
-
-    private bool IsInTrigger()
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        // Проверяем, находится ли персонаж внутри триггера.
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.5f);
-        foreach (Collider collider in colliders)
+        if (collision.CompareTag("YellowDoor"))
         {
-            if (collider.gameObject.tag == "TeleportTrigger")
-            {
-                Debug.Log("2");
-                return true;
-            }
+            IN = true;
         }
-
-        return false;
     }
+
 }
