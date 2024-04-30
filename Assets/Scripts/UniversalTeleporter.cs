@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class UniversalTeleporter : MonoBehaviour
 {
     public Light2D player;
+    public CameraScript CameraScript;
     public Transform Camera;
     public Transform Player;
     public Transform RedRoom;
@@ -22,6 +23,7 @@ public class UniversalTeleporter : MonoBehaviour
     {
         Teleport(Maze, MazeCamera);
         player.enabled = true;
+        CameraScript.Follow = true;
     }
 
     public void Teleport(Transform target, Transform cameraTarget)

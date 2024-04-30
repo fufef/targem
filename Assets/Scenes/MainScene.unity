@@ -3735,6 +3735,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: -10}
   dampling: 0.5
   target: {fileID: 492009680}
+  Follow: 0
 --- !u!114 &270846123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7541,6 +7542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 628750668}
+  CameraScript: {fileID: 270846122}
   Camera: {fileID: 270846121}
   Player: {fileID: 492009680}
   RedRoom: {fileID: 88670618}
@@ -20679,7 +20681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -340.3, y: 198.6}
+  m_AnchoredPosition: {x: -479.92, y: 325.4}
   m_SizeDelta: {x: 166.16, y: 23.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1604382878
@@ -21681,7 +21683,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 270846120}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -21689,7 +21691,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1830214161
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1716805713

@@ -12,16 +12,13 @@ public class CameraScript : MonoBehaviour
 
     public Transform target;
 
-    private Vector3 vel = Vector3.zero;
+    public bool Follow;
 
     private void Update()
     {
-        Vector3 targetPos = target.position + offset;   
-        targetPos.z = transform.position.z;
-
-        if (Player.count_button % 2 != 0)
+        if (Follow)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref vel, dampling);
+            transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
         }
     }
 }
