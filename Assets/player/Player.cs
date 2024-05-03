@@ -67,11 +67,6 @@ public class Player : Character
             animator.Play("walk_down");
         }
 
-        if (Input.GetKey(KeyCode.X))
-        {
-            TakeDamage();
-        }
-
         rb.velocity = new Vector2(moveX, moveY);
         
         if (moveX == 0 & moveY == 0)
@@ -82,9 +77,16 @@ public class Player : Character
 
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-        health = health - 0.1f;
-        healthBar.SetHealth(health);
+        if (health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            health = health - damage;
+            healthBar.SetHealth(health);
+        }
     }
 }
