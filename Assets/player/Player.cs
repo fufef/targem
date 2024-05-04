@@ -1,13 +1,21 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Player : Character
 {
     Animator animator;
     SpriteRenderer sprite;
     Rigidbody2D rb;
+    public TextMeshProUGUI moneyBar;
     public HealthBar healthBar;
     float health = 1;
     public Animator Animator;
+    private bool isShopOpened;
+    private int money = 100;
+    public TextMeshProUGUI shopUI;
+    public Light2D flashlight;
+    private float damageModificator = 1f;
 
 
     [SerializeField]
@@ -26,6 +34,53 @@ public class Player : Character
     }
 
     public static int count_button = 0;
+
+    private new void Update()
+    {
+        base.Update();
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            isShopOpened = !isShopOpened;
+            if (isShopOpened)
+            {
+                shopUI.enabled = true;
+            }
+            else
+            {
+                shopUI.enabled = false;
+            }
+        }
+
+        if (isShopOpened)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (money >= 30)
+                {
+                    flashlight.shapeLightFalloffSize = flashlight.shapeLightFalloffSize + 0.5f;
+                    money -= 30;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                if (money >= 30)
+                {
+                    speed = speed + 0.3f;
+                    money -= 30;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                if (money >= 30)
+                {
+                    damageModificator = damageModificator - 0.05f;
+                    money -= 30;
+                }
+            }
+        }
+    }
 
 
     private void FixedUpdate()
@@ -75,6 +130,7 @@ public class Player : Character
         }
         else { Animator.SetInteger("walk", 1); }
 
+        moneyBar.text = money.ToString();
     }
 
     public void TakeDamage(float damage)
@@ -85,7 +141,7 @@ public class Player : Character
         }
         else
         {
-            health = health - damage;
+            health = health - damage * damageModificator;
             healthBar.SetHealth(health);
         }
     }
