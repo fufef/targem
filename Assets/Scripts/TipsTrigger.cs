@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TipsTrigger : MonoBehaviour
 {
-    [Header("Текст подсказки")]
+    public RectTransform objectToTeleport;
+    public RectTransform newPosition;
+
     [TextArea(3,10)]
     [SerializeField] private string message;
 
@@ -12,6 +14,11 @@ public class TipsTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+          //  RectTransform rectTransform = objectToTeleport.GetComponent<RectTransform>();
+           // Debug.Log(rectTransform.position);
+            //        rectTransform.anchoredPosition = newPosition.anchoredPosition;
+            objectToTeleport.position = newPosition.position;
+
             TipsManager.displayTipEvent?.Invoke(message);
         }
     }
