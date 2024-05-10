@@ -8,6 +8,20 @@ TagManager:
   - TeleportTrigger
   - RedDoor
   - Stenomaska
+  - BlueDoor
+  - Mayor
+  - Sword
+  - Goblet
+  - Book
+  - Stick
+  - Candle
+  - Sheal
+  - Banana
+  - Saber
+  - Vase
+  - Crown
+  - cheast
+  - Neckless
   layers:
   - Default
   - TransparentFX

@@ -13,10 +13,24 @@ public class UniversalTeleporter : MonoBehaviour
     public Transform RedRoomCamera;
     public Transform Maze;
     public Transform MazeCamera;
+    public Transform SearchRoom;
+    public Transform SearchRoomCamera;
+    public Transform Search;
+    public Transform SearchCamera;
     // Start is called before the first frame update
     public void ToRedRoom()
     {
         Teleport(RedRoom, RedRoomCamera);
+    }
+
+    public void ToSearchdRoom()
+    {
+        Teleport(SearchRoom, SearchRoomCamera );
+    }
+
+    public void toSearch()
+    {
+        Teleport(Search , SearchCamera );
     }
 
     public void ToMaze()
