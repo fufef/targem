@@ -8,6 +8,9 @@ TagManager:
   - TeleportTrigger
   - RedDoor
   - Stenomaska
+  - Mayor
+  - BlueDoor
+  - Exit
   layers:
   - Default
   - TransparentFX

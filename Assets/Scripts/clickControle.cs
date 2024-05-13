@@ -6,12 +6,11 @@ public class clickControle : MonoBehaviour
 {
     public static string objectName;
     public GameObject objectNemeText;
-    public UniversalTeleporter universalTeleporter = new UniversalTeleporter();
+    public UniversalTeleporter universalTeleporter;
     
 
     private void OnMouseDown()
     {
-        
         Debug.Log("нажат");
 
         if (objectNemeText != null)
