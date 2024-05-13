@@ -6,6 +6,7 @@ public class TeleportRouter : MonoBehaviour
     private bool InRed;
     private bool InBlue;
     private bool InSearch;
+    private bool Exit;
     public UniversalTeleporter universalTeleporter;
     private void Update()
     {
@@ -23,7 +24,13 @@ public class TeleportRouter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && InBlue && Count.count != 0)
         {
             universalTeleporter.ToSearchdRoom();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && InBlue && Exit)
+        {
+            universalTeleporter.toLobby();
+            Debug.Log("dfgkjfkgjfg");
             InBlue = false;
+            Exit = false;
         }
         if (Input.GetKeyDown(KeyCode.E) && InSearch &&  Count.count != 0)
         {
@@ -51,7 +58,12 @@ public class TeleportRouter : MonoBehaviour
         {
             InSearch = true;
         }
+        if (collision.CompareTag("Exit"))
+        {
+            Exit = true;
+        }
 
+        
     }
 
 }
