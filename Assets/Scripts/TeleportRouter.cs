@@ -4,6 +4,8 @@ public class TeleportRouter : MonoBehaviour
 {
     private bool InYellow;
     private bool InRed;
+    private bool InBlue;
+    private bool InSearch;
     public UniversalTeleporter universalTeleporter;
     private void Update()
     {
@@ -18,6 +20,16 @@ public class TeleportRouter : MonoBehaviour
             universalTeleporter.ToMaze();
             InRed = false;
         }
+        if (Input.GetKeyDown(KeyCode.E) && InBlue && Count.count != 0)
+        {
+            universalTeleporter.ToSearchdRoom();
+            InBlue = false;
+        }
+        if (Input.GetKeyDown(KeyCode.E) && InSearch &&  Count.count != 0)
+        {
+            universalTeleporter.toSearch();
+            InSearch = false;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +43,15 @@ public class TeleportRouter : MonoBehaviour
         {
             InRed = true;
         }
+        if (collision.CompareTag("BlueDoor"))
+        {
+            InBlue = true;
+        }
+        if (collision.CompareTag("Mayor"))
+        {
+            InSearch = true;
+        }
+
     }
 
 }
