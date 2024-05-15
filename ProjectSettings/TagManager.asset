@@ -11,6 +11,7 @@ TagManager:
   - Mayor
   - BlueDoor
   - Exit
+  - ExitToLobby
   layers:
   - Default
   - TransparentFX

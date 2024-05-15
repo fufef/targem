@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DialogueManager : MonoBehaviour
+public class RedRoomDialougeManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
     public GameObject dialogueBox;
@@ -63,9 +63,14 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && playerInCollider)
         {
             StartDialogue(new string[] {
-        "Привет, путник.",
-        "Добро пожаловать в наше селение.",
-        "Могу ли я чем-нибудь помочь?"
+        "Вейд: Чёрт возьми! Ты ещё кто такой?",
+        "Вейд: Защищайся!",
+        "Демон: К чему все эти крики? Я просто азартный игрок.",
+        "Демон: Положи свой меч и оставь браваду. Присаживайся за стол, сыграем в кости.",
+        "Вейд: Вот так просто? В чём подвох — играем на душу?",
+        "Демон: Выиграешь — получишь что-то, что поможет в твоих поисках.",
+        "Демон: Проиграешь — усложнишь себе поиски.",
+        "Демон: Это все правила."
         });
         }
 

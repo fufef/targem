@@ -19,6 +19,7 @@ public class UniversalTeleporter : MonoBehaviour
     public Transform SearchCamera;
     public Transform Lobby;
     public Transform LobbyCamera;
+    public Transform InRedRoom;
     // Start is called before the first frame update
     public void ToRedRoom()
     {
