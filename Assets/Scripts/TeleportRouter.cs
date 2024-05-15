@@ -12,18 +12,18 @@ public class TeleportRouter : MonoBehaviour
     public UniversalTeleporter universalTeleporter;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && InYellow)
+        if (Input.GetKeyDown(KeyCode.E) && InYellow && !Count.over)
         {
             universalTeleporter.ToRedRoom();
             InYellow = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && InRed)
+        if (Input.GetKeyDown(KeyCode.E) && InRed && !Count.over)
         {
             universalTeleporter.ToMaze();
             InRed = false;
         }
-        if (Input.GetKeyDown(KeyCode.E) && InBlue && Count.count != 0)
+        if (Input.GetKeyDown(KeyCode.E) && InBlue && Count.count != 0 && !Count.over)
         {
             universalTeleporter.ToSearchdRoom();
         }
