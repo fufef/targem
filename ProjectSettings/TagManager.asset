@@ -12,6 +12,7 @@ TagManager:
   - BlueDoor
   - Exit
   - ExitToLobby
+  - Wall
   layers:
   - Default
   - TransparentFX

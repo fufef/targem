@@ -40,7 +40,7 @@ public class TeleportRouter : MonoBehaviour
             Debug.Log("dfgkjfkgjfg");
             ExitToLobby = false;
         }
-        if (Input.GetKeyDown(KeyCode.E) && InSearch &&  Count.count != 0)
+        if (Input.GetKeyDown(KeyCode.F) && InSearch &&  Count.count != 0)
         {
             universalTeleporter.toSearch();
             InSearch = false;

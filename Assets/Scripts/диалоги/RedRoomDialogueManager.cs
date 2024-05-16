@@ -48,6 +48,7 @@ public class RedRoomDialougeManager : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerInCollider = false;
+            EndDialogue();
         }
     }
 
@@ -75,7 +76,7 @@ public class RedRoomDialougeManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && playerInCollider)
         {
             ShowNextDialogueLine();
         }

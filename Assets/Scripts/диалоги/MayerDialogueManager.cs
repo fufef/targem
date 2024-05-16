@@ -10,7 +10,8 @@ public class MayerDialogueManager : MonoBehaviour
     private int currentLineIndex = 0;
     private string[] dialogueLines;
     private bool playerInCollider = false;
-    private int count = 0;
+    private bool poisk = false;
+
     void Start()
     {
         dialogueBox.SetActive(false);
@@ -26,7 +27,7 @@ public class MayerDialogueManager : MonoBehaviour
 
     public void ShowNextDialogueLine()
     {
-        if (currentLineIndex < dialogueLines.Length)
+        if (currentLineIndex < dialogueLines.Length && playerInCollider)
         {
             dialogueText.text = dialogueLines[currentLineIndex];
             currentLineIndex++;
@@ -44,15 +45,15 @@ public class MayerDialogueManager : MonoBehaviour
             playerInCollider = true;
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             playerInCollider = false;
+            EndDialogue();
         }
     }
-
-
 
     public void EndDialogue()
     {
@@ -61,7 +62,7 @@ public class MayerDialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && playerInCollider)
+        if (Input.GetKeyDown(KeyCode.E) && playerInCollider && Count.count == 12)
         {
             StartDialogue(new string[] {
         "Вейд: Вот вы где",
@@ -70,27 +71,18 @@ public class MayerDialogueManager : MonoBehaviour
         "Мер: Но если ты мне найдёшь 12 вещей из списка, то последую твоему совету",
         "Нажми F и начни поиск"
         });
-          //  count++;
         }
 
-        if (playerInCollider && count == 1)
+        if (playerInCollider && Input.GetKeyDown(KeyCode.E) && Count.count == 0 && !poisk)
         {
             StartDialogue(new string[] {
         "Мер: Моя прелесть!",
         "Мер: Ладно, ты иди, а я за тобой",
         "Вейд: Вот и славно"
         });
-            count++;
-        }
+            poisk = true;
 
-        if (Input.GetKeyDown(KeyCode.E) && playerInCollider && count == 2)
-        {
-            StartDialogue(new string[] {
-        "Там случился обвал!",
-        "в комнату больше не попасть"
-        });
         }
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
