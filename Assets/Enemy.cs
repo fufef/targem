@@ -13,11 +13,18 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!player.inMaze)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+
         var diff = player.transform.position - this.transform.position;
         diff = speed * diff.normalized;
         rb.velocity = diff;

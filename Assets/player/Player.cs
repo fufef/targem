@@ -16,6 +16,7 @@ public class Player : Character
     public TextMeshProUGUI shopUI;
     public Light2D flashlight;
     private float damageModificator = 1f;
+    public bool inMaze = false;
 
 
     [SerializeField]
