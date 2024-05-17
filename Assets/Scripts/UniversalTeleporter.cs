@@ -42,8 +42,6 @@ public class UniversalTeleporter : MonoBehaviour
     public void ToMaze()
     {
         Teleport(Maze, MazeCamera, true);
-        playerLight.enabled = true;
-        CameraScript.Follow = true;
     }
 
     public void Teleport(Transform target, Transform cameraTarget, bool inMaze = false)
@@ -51,5 +49,7 @@ public class UniversalTeleporter : MonoBehaviour
         Camera.transform.position = new Vector3(cameraTarget.position.x, cameraTarget.position.y, Camera.transform.position.z);
         Player.transform.position = new Vector3(target.position.x, target.position.y, target.position.z);
         player.inMaze = inMaze;
+        playerLight.enabled = inMaze;
+        CameraScript.Follow = inMaze;
     }
 }

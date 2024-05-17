@@ -7,6 +7,7 @@ public class Player : Character
     Animator animator;
     SpriteRenderer sprite;
     Rigidbody2D rb;
+    public Sprite deathSprite;
     public TextMeshProUGUI moneyBar;
     public HealthBar healthBar;
     float health = 1;
@@ -38,7 +39,12 @@ public class Player : Character
 
     private new void Update()
     {
-        base.Update();
+        if (health < 0)
+        {
+            base.Update();
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             isShopOpened = !isShopOpened;
@@ -86,6 +92,12 @@ public class Player : Character
 
     private void FixedUpdate()
     {
+        if (health < 0)
+        {
+            base.Update();
+            return;
+        }
+
         float moveX = 0f;
         float moveY = 0f;
 
@@ -144,6 +156,11 @@ public class Player : Character
         {
             health = health - damage * damageModificator;
             healthBar.SetHealth(health);
+            if (health <= 0)
+            {
+                animator.enabled = false;
+                sprite.sprite = deathSprite;
+            }
         }
     }
 }
