@@ -18,7 +18,7 @@ public class Player : Character
     public Light2D flashlight;
     private float damageModificator = 1f;
     public bool inMaze = false;
-
+    private bool iscos = false;
 
     [SerializeField]
     private float speed;
@@ -101,22 +101,34 @@ public class Player : Character
         float moveX = 0f;
         float moveY = 0f;
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && iscos == false)
         {
             moveX = speed;
             animator.Play("walk_x");
             sprite.flipX = false;
         }
 
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveX = speed;
+        }
+
+        if (Input.GetKey(KeyCode.A) && iscos == false)
         {
             moveX = -speed;
             animator.Play("walk_x");
             sprite.flipX = true;
         }
 
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveX = -speed;
+        }
+
         if (Input.GetKey(KeyCode.W))
         {
+            iscos = true;
+            Debug.Log("j");
             moveY = speed;
             if (moveX != 0f)
             {
@@ -124,9 +136,16 @@ public class Player : Character
             }
             animator.Play("walk_up");
         }
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+        {
+            iscos = false;
+            Debug.Log("sddasda");
+        }
 
         if (Input.GetKey(KeyCode.S))
         {
+            iscos = true;
+            Debug.Log("s");
             moveY = -speed;
             if (moveX != 0f)
             {
